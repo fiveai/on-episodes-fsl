@@ -1,7 +1,7 @@
 # On Episodes, Prototypical Networks, and Few-Shot Learning
--------------------------------------------------------
---> Work in progress - code will be available soon <---
--------------------------------------------------------
+
+#### --> Work in progress - code will be released soon <---
+
 ## Usage
 ### With conda
 
