@@ -1,0 +1,22 @@
+name: few_shot_NCA
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - configargparse
+  - cudatoolkit=9.2
+  - numpy
+  - pillow
+  - python=3.5
+  - pytorch=1.3
+  - scikit-image
+  - tensorboard
+  - torchvision
+  - pip
+  - pyyaml
+  - tensorboardX
+  - pip:
+    - tqdm
+    - gitpython
+    - gdown

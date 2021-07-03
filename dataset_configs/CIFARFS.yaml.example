@@ -1,0 +1,3 @@
+num-classes: 64
+data: 'path/to/cifar100/images'
+split-dir: '../split/CIFARFS/'

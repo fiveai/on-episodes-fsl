@@ -1,8 +1,6 @@
 # On Episodes, Prototypical Networks, and Few-Shot Learning
 
-#### --> Work in progress - code will be released soon <---
-
-This ixs the codebase for the paper *[On Episodes, Prototypical Networks, and Few-Shot Learning](https://arxiv.org/abs/2012.09831)*, by Steinar Laenen and Luca Bertinetto.
+This is the codebase for the paper *[On Episodes, Prototypical Networks, and Few-Shot Learning](https://arxiv.org/abs/2012.09831)*, by Steinar Laenen and Luca Bertinetto.
 
 A preliminary version of this work appeared as an oral presentation at [NeurIPS 2020 workshop on meta-learning](https://meta-learn.github.io/2020/).
 
@@ -41,9 +39,8 @@ python src/utils/tieredImagenet.py --data path-to-tiered --split split/tiered/
 
 When setting the `data` argument in `./dataset_configs/tieredimagenet.yaml.example`, make sure that it points to the `data` folder:`path/to/tiered-imagenet/data/`.
 
-### 2.4 CIFAR-FS
+### 2.4 CIFARFS
 You can download the dataset from https://drive.google.com/file/d/1pTsCCMDj45kzFYgrnO67BWVbKs48Q3NI/view.
-For convenience, it can be downloaded from the command line using 
 
 After downloading and unzipping this dataset, you have to run the follow script to generate split files.
 ```angular2
@@ -65,28 +62,51 @@ python ./start_training.py
  `./src/utils/configs/configuration.py` contains all the arguments that can be specified.
 
 
-### 4 Run experiments
-Experiment scripts are all in `./scripts/bash_scripts/`. Note that some scripts might need to be adjusted to account for which GPUs are used for training.
+### 4 Experimental results
+Experiments scripts live under `./scripts/bash_scripts/`
 
-For the **batch size experiments** run: 
-* `./bash_scripts/batch_expm_cifar.sh`
-* `./bash_scripts/batch_expm_miniimagenet.sh`
+**Batch-size experiments** run: 
+* `./bash_scripts/batch_expm_cifar_proto.sh`
+* `./bash_scripts/batch_expm_miniimagenet_proto.sh`
+* `./bash_scripts/batch_expm_cifar_matching.sh`
+* `./bash_scripts/batch_expm_miniimagenet_matching.sh`
 
-For the **ablation experiments** run: 
-* `./bash_scripts/abl_all_cifar.sh` 
-* `./bash_scripts/abl_all_miniimagenet.sh` 
 
-To run the **subsampling experiment**:
-* `./bash_scripts/sample_NCA_pairs.sh SAMPLE="0.01 0.05 0.1 0.2 0.4 0.8" SEED="0 1 2 3 4"`
+**Ablation experiments** run: 
+* `./bash_scripts/abl_all_cifar_proto.sh` 
+* `./bash_scripts/abl_all_miniimagenet_proto.sh` 
 
-To run the experiments to generate the tables at the end of Section 3, run:
-* `./bash_scripts/nca_rn12_bestminiimagenet.sh GPU='X,X' SEED="0 1 2 3 4"`
-* `./bash_scripts/nca_rn12_cifar.sh GPU='X,X' SEED="0 1 2 3 4"`
-* `./bash_scripts/nca_rn12_tiered.sh GPU='X,X' SEED="0 1 2 3 4"`
-* `./bash_scripts/protonew_rn12_cifar.sh GPU='X,X' SEED="0 1 2 3 4"`
-* `./bash_scripts/protoold_miniimagenet.sh GPU='X,X' SEED="0 1 2 3 4"`
-* `./bash_scripts/protoold_tiered.sh GPU='X,X' SEED="0 1 2 3 4"`
-* `./bash_scripts/protold_cifar.sh GPU='X,X' SEED="0 1 2 3 4"`
+**Subsampling experiment**:
 
-#### How to get accuracy + conf interval over 5 seeds
-Results for all 10.000 episodes get saved in `./results/numpy_results`. We have an example script in `./scripts/extract_mean_conf.py`, where the correct regex for the experiment needs to be written to extract the mean + conf interval for the test and validation set.
+* `./bash_scripts/sample_NCA_pairs_proto.sh GPU='X,X' SAMPLE="0.01 0.05 0.1 0.2 0.4 0.8" SEED="0 1 2"`
+* `./bash_scripts/sample_NCA_pairs_matching.sh GPU='X,X' SAMPLE="0.01 0.05 0.1 0.2 0.4 0.8" SEED="0 1 2"`
+
+**Comparisons for large table**:
+
+NCA results
+* `./bash_scripts/nca_rn12_miniimagenet.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/nca_rn12_miniimagenet_soft.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/nca_rn12_cifar.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/nca_rn12_cifar_soft.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/nca_rn12_tiered.sh GPU='X,X,X,X' SEED="0 1 2"`
+* `./bash_scripts/nca_rn12_tiered_soft.sh GPU='X,X,X,X' SEED="0 1 2"`
+
+New (ours) episodic setups for matching and prototypical networks
+* `./bash_scripts/protonew_rn12_cifar.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/matchingnew_rn12_cifar.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/protonew_rn12_tiered.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/matchingnew_rn12_tiered.sh GPU='X,X' SEED="0 1 2"`
+
+Old episodic setups for matching and prototypical networks
+* `./bash_scripts/protoold_miniimagenet.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/matchingold_miniimagenet.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/protoold_cifar.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/matchingold_cifar.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/protoold_tiered.sh GPU='X,X' SEED="0 1 2"`
+* `./bash_scripts/matchingold_tiered.sh GPU='X,X' SEED="0 1 2"`
+
+
+#### How to get accuracy + conf interval over 3 seeds
+Results for all 30.000 episodes get saved in `./results/numpy_results`. You can find an example script in `./scripts/extract_mean_conf.py`, where the correct regex for the experiment needs to be written to extract the mean + conf interval for the test and validation set. For more details see the scripts.
+
+The code in this repository is adapted from the [code for SimpleShot](https://github.com/mileyan/simple_shot). We thank the authors for making their code available.

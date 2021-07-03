@@ -1,0 +1,3 @@
+num-classes: 351
+data: 'path/to/tiered-imagenet/data/'
+split-dir: '../split/tiered'
