@@ -1,6 +1,6 @@
 # On Episodes, Prototypical Networks, and Few-Shot Learning
 
-This is the codebase for the paper *[On Episodes, Prototypical Networks, and Few-Shot Learning](https://arxiv.org/abs/2012.09831)*, by Steinar Laenen and Luca Bertinetto.
+This is the codebase for the **NeurIPS 2021** paper *[On Episodes, Prototypical Networks, and Few-Shot Learning](https://arxiv.org/abs/2012.09831)*, by Steinar Laenen and Luca Bertinetto.
 
 A preliminary version of this work appeared as an oral presentation at [NeurIPS 2020 workshop on meta-learning](https://meta-learn.github.io/2020/).
 
